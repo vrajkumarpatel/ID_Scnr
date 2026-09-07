@@ -1,0 +1,12 @@
+fastapi==0.115.0
+uvicorn==0.30.0
+sqlalchemy==2.0.34
+pydantic==2.9.2
+python-multipart==0.0.9
+Pillow==10.4.0
+pytesseract==0.3.10
+pyzbar==0.1.9
+cryptography==43.0.1
+numpy>=1.24.0
+pywin32>=306; platform_system=="Windows"
+comtypes>=1.2.0; platform_system=="Windows"

@@ -1,0 +1,1 @@
+export const isValidPin = (s) => /^\d{4,6}$/.test(String(s || ''))
