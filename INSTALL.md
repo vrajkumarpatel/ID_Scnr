@@ -27,8 +27,8 @@ Quick installation guide for different operating systems.
 
 ```powershell
 # Clone repository
-git clone https://github.com/vrajkumar-patel/idscnr.git
-cd idscnr
+git clone https://github.com/vrajkumarpatel/ID_Scnr.git
+cd ID_Scnr
 
 # Backend setup
 cd backend
@@ -82,8 +82,8 @@ npm run dev
 
 ```bash
 # Clone repository
-git clone https://github.com/vrajkumar-patel/idscnr.git
-cd idscnr
+git clone https://github.com/vrajkumarpatel/ID_Scnr.git
+cd ID_Scnr
 
 # Backend setup
 cd backend
@@ -132,8 +132,8 @@ sudo apt-get install -y tesseract-ocr tesseract-ocr-eng libtesseract-dev
 
 ```bash
 # Clone repository
-git clone https://github.com/vrajkumar-patel/idscnr.git
-cd idscnr
+git clone https://github.com/vrajkumarpatel/ID_Scnr.git
+cd ID_Scnr
 
 # Backend setup
 cd backend
@@ -192,8 +192,8 @@ Same as Ubuntu/Debian above.
 
 ```bash
 # Clone repository
-git clone https://github.com/vrajkumar-patel/idscnr.git
-cd idscnr
+git clone https://github.com/vrajkumarpatel/ID_Scnr.git
+cd ID_Scnr
 
 # Create .env file
 cat > .env << EOF
@@ -289,6 +289,6 @@ lsof -i :8000
 
 ---
 
-**Need Help?** Open an issue on [GitHub](https://github.com/vrajkumar-patel/idscnr/issues)
+**Need Help?** Open an issue on [GitHub](https://github.com/vrajkumarpatel/ID_Scnr/issues)
 
 

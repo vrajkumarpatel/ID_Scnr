@@ -52,8 +52,8 @@ Download from [GitHub Releases](https://github.com/UB-Mannheim/tesseract/wiki) a
 
 ```bash
 # Clone repository
-git clone https://github.com/vrajkumar-patel/idscnr.git
-cd idscnr
+git clone https://github.com/vrajkumarpatel/ID_Scnr.git
+cd ID_Scnr
 
 # Create .env file
 cat > .env << EOF

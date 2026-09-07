@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**IDSCNR** is a modern, privacy-focused ID scanning and guest management system designed for hospitality and property management. Built with FastAPI and React, it provides secure, local OCR processing without relying on cloud APIs.
+**IDSCNR** is a privacy-focused ID scanning and guest management system designed for hospitality and property management. Built with FastAPI and React, it defaults to secure, local Tesseract OCR processing rather than a cloud API — with an opt-in cloud OCR provider (Google Vision) available if you supply your own key. See the [README](./README.md) for the full, verified feature list and known limitations.
 
 ---
 
@@ -14,16 +14,16 @@
 
 ## Short Description
 
-IDSCNR is a full-stack web application that automates guest check-in processes by scanning and extracting data from ID documents. Unlike cloud-based solutions, all OCR processing happens locally using Tesseract, ensuring sensitive guest information never leaves your infrastructure. The system includes automated DNR (Do Not Rent) matching, encrypted image storage, and seamless PMS integration.
+IDSCNR is a full-stack web application that automates guest check-in by scanning and extracting data from ID documents. By default, OCR runs locally via Tesseract, so guest data never leaves the machine — a Google Vision cloud OCR option exists but is opt-in and off by default. The system includes automated DNR (Do Not Rent) matching, AES-256-GCM encrypted image storage, and PMS export via JSON/CSV files, an HTTP POST, or Windows keystroke-based autofill into another application's window.
 
 ---
 
 ## Key Features
 
 ### 🔒 Privacy & Security
-- **Local OCR Processing**: All text extraction happens on-premises using Tesseract OCR
-- **Encrypted Storage**: AES-256 encryption for all ID images at rest
-- **No External APIs**: Zero dependency on cloud services for core functionality
+- **Local OCR by Default**: Text extraction runs on-premises using Tesseract OCR; a cloud Google Vision provider is available but opt-in only
+- **Encrypted Storage**: AES-256-GCM encryption for all ID images at rest
+- **No External APIs Required**: The default configuration has zero cloud dependency for OCR
 - **JWT Authentication**: Secure token-based access control
 - **PIN Protection**: Admin operations require PIN verification
 
@@ -96,11 +96,11 @@ IDSCNR is a full-stack web application that automates guest check-in processes b
 ## Technical Highlights
 
 ### Architecture
-- **RESTful API**: Well-structured endpoints with OpenAPI documentation
-- **Modular Design**: Separated concerns (OCR, DNR, security, database)
-- **Type Safety**: Type hints throughout Python codebase
-- **Error Handling**: Comprehensive exception handling with user-friendly messages
-- **Logging**: Structured JSON logging for production monitoring
+- **RESTful API**: FastAPI endpoints with auto-generated OpenAPI docs at `/docs`
+- **Modular Design**: Separated concerns (OCR, DNR, security, database) across dedicated modules
+- **Type Safety**: Pydantic schemas and type hints on the Python side
+- **Error Handling**: Exception handling with HTTP error responses throughout `main.py`
+- **Logging**: Plain-text application logging to `backend/data/app.log` (not structured/JSON)
 
 ### Performance
 - **Async Operations**: FastAPI async endpoints for concurrent requests
@@ -128,21 +128,20 @@ IDSCNR is a full-stack web application that automates guest check-in processes b
 
 ## Project Statistics
 
-- **Lines of Code**: ~5,000+ (Backend + Frontend)
-- **API Endpoints**: 30+ RESTful endpoints
+- **Lines of Code**: ~5,400 (Backend ~3,800 + Frontend ~1,600), counted from the tracked source files
+- **API Endpoints**: 38 RESTful endpoints (counted in `backend/main.py`)
 - **Database Tables**: 2 main tables (Guests, Blacklist)
-- **Components**: 15+ React components
-- **Test Coverage**: Unit tests for critical functions
+- **Components**: 5 page/component files (App, Header, Guests, DNR, Settings)
+- **Test Coverage**: Test files exist for backend (pytest) and frontend (Vitest + Playwright) covering date parsing/validation, API smoke, image security, and key UI flows — not run/measured as part of this integration, so no coverage percentage is claimed
 
 ---
 
 ## Development Highlights
 
-- **Privacy-First Design**: No cloud dependencies for core functionality
-- **Production-Ready**: Comprehensive error handling, logging, and monitoring
-- **Scalable Architecture**: Easy to extend with new features
-- **Developer-Friendly**: Clear code structure, documentation, and testing
-- **Cross-Platform**: Works on Windows, macOS, and Linux
+- **Privacy-First by Default**: Tesseract OCR runs locally with no cloud dependency; a Google Vision cloud OCR provider exists as an explicit opt-in, not the default
+- **Local Prototype, Not Yet Production-Hardened**: functional error handling and file logging exist, but there's no CI, an unsalted PIN hash, and a hardcoded JWT fallback secret — see the README for the full list
+- **Modular Architecture**: OCR, DNR matching, security, and PMS export are cleanly separated modules, making it straightforward to extend
+- **Windows-Dependent Features**: physical scanner capture and PMS window autofill require Windows (`pywin32`/`comtypes`); OCR-via-upload works cross-platform
 
 ---
 
@@ -161,9 +160,9 @@ IDSCNR is a full-stack web application that automates guest check-in processes b
 
 ## Repository Information
 
-- **GitHub**: [github.com/vrajkumar-patel/idscnr](https://github.com/vrajkumar-patel/idscnr)
+- **GitHub**: [github.com/vrajkumarpatel/ID_Scnr](https://github.com/vrajkumarpatel/ID_Scnr)
 - **License**: MIT
-- **Status**: Production Ready
+- **Status**: Working local prototype — see [README.md § Limitations](./README.md#limitations) for what's not yet production-hardened (no CI, unsalted PIN hash, hardcoded JWT fallback secret, no Docker/Electron despite being documented)
 - **Maintainer**: Vrajkumar Patel
 
 ---

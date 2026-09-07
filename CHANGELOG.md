@@ -16,7 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enhanced .gitignore for proper repository management
 
 ### Changed
-- **BREAKING**: Removed Google OCR support completely - now uses Tesseract OCR only
+- Switched the default OCR provider to Tesseract (local); a Google Vision OCR
+  provider remains implemented and selectable as an opt-in — see
+  `README.md` § Limitations. (An earlier version of this changelog claimed
+  Google OCR was removed entirely; that was inaccurate.)
 - Refactored date parsing functions into reusable utility module
 - Updated Docker configuration to include Tesseract OCR installation
 - Improved code organization and removed duplicate functions
@@ -29,8 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cleaned up unused imports
 
 ### Security
-- Removed dependency on external cloud APIs for OCR processing
-- All OCR processing now happens locally
+- Made local Tesseract OCR the default so no external API call is required
+  out of the box (the optional Google Vision provider still exists for
+  users who opt in with their own key)
 
 ## [0.1.0] - 2025-01-XX
 
@@ -55,8 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 If upgrading from a version that used Google OCR:
 
-1. **No migration needed** - The system automatically uses Tesseract OCR
-2. **No API keys required** - All processing is local
+1. **No migration needed** - The system defaults to Tesseract OCR
+2. **No API key required by default** - Tesseract runs locally; only the
+   optional Google Vision provider needs a key
 3. **Database schema** - No changes, existing data is compatible
 4. **Settings** - OCR provider setting is now fixed to "tesseract"
 
